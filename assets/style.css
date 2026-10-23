@@ -1,18 +1,97 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
 
-.stApp { background: __APP_BG__; color: __TEXT__; font-family: "Pretendard", sans-serif; }
-.stApp [data-testid="stSidebar"] { background: __SIDEBAR_BG__; }
-.stApp .stMarkdown, .stApp label, .stApp h1, .stApp h2, .stApp h3 { color: __TEXT__; }
+.stApp { background: var(--bg); color: var(--text); font-family: "Pretendard", sans-serif; }
+.stApp header[data-testid="stHeader"] { background: transparent; }
+.stApp .block-container { padding-top: 2rem; max-width: 1200px; }
+.stApp h1, .stApp h2, .stApp h3, .stApp label, .stApp .stMarkdown { color: var(--text); }
+.stApp a { color: var(--accent); }
+.stApp [data-testid="stCaptionContainer"] { color: var(--muted); }
 
-.stApp [data-testid="stSidebar"] [role="radiogroup"] label p {
-  font-size: 1.15rem; font-weight: 800;
+/* ---------- 사이드바 ---------- */
+.stApp [data-testid="stSidebar"] { background: var(--sidebar); border-right: 1px solid var(--border); }
+.dh-brand { display:flex; align-items:center; gap:10px; padding:6px 0 14px; }
+.dh-brand .logo { font-size:1.8rem; }
+.dh-brand .name { font-size:1.25rem; font-weight:800; color:var(--text); line-height:1.1; }
+.dh-brand .sub { font-size:.72rem; color:var(--muted); letter-spacing:.08em; }
+.stApp [data-testid="stSidebar"] [role="radiogroup"] label {
+  padding: 8px 10px; border-radius: 10px; transition: background .15s;
 }
-.stApp [data-testid="stSidebar"] [role="radiogroup"] label:hover p {
-  color: __ACCENT__; text-shadow: 0 0 8px __ACCENT__;
-}
+.stApp [data-testid="stSidebar"] [role="radiogroup"] label:hover { background: var(--card); }
+.stApp [data-testid="stSidebar"] [role="radiogroup"] label p { font-size: 1.05rem; font-weight: 700; }
+.stApp [data-testid="stSidebar"] [role="radiogroup"] label:hover p { color: var(--accent); }
 
+/* ---------- 입력 ---------- */
 .stApp input, .stApp textarea, .stApp [data-baseweb="select"] > div {
-  background-color: __SIDEBAR_BG__; color: __TEXT__; border-color: __ACCENT__;
+  background-color: var(--card); color: var(--text); border-color: var(--border);
 }
-.stApp [data-testid="stChatInput"] textarea { color: __TEXT__; }
-.stApp a { color: __ACCENT__; }
+.stApp [data-testid="stChatInput"] textarea { color: var(--text); }
+.stApp .stButton button, .stApp .stDownloadButton button {
+  background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 10px;
+}
+.stApp .stButton button:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- 탭 ---------- */
+.stApp button[data-baseweb="tab"] { font-weight: 700; }
+.stApp button[data-baseweb="tab"][aria-selected="true"] { color: var(--accent); }
+
+/* ---------- 히어로 ---------- */
+.dh-hero {
+  border-radius: 18px; padding: 26px 28px; margin-bottom: 18px;
+  background: linear-gradient(135deg, var(--hero1), var(--hero2));
+  border: 1px solid var(--border); box-shadow: 0 8px 28px rgba(0,0,0,.18);
+}
+.dh-hero .eyebrow { font-size:.78rem; letter-spacing:.14em; color:var(--accent); font-weight:700; }
+.dh-hero .title { font-size:1.9rem; font-weight:800; color:var(--text); margin:4px 0 6px; }
+.dh-hero .desc { color:var(--muted); font-size:.95rem; }
+.dh-chips { margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; }
+
+/* ---------- 칩/배지 ---------- */
+.dh-chip {
+  display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px;
+  font-size:.85rem; font-weight:700; border:1px solid var(--border); background:var(--card); color:var(--text);
+}
+.dh-chip.lvl0 { border-color:var(--ok);     color:var(--ok); }
+.dh-chip.lvl1 { border-color:var(--warn);   color:var(--warn); }
+.dh-chip.lvl2 { border-color:var(--danger); color:var(--danger); }
+
+/* ---------- KPI 카드 ---------- */
+.dh-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:6px 0 18px; }
+.dh-card {
+  background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px 18px;
+  box-shadow:0 4px 16px rgba(0,0,0,.10);
+}
+.dh-card .k { font-size:.8rem; color:var(--muted); font-weight:600; }
+.dh-card .v { font-size:1.9rem; font-weight:800; color:var(--text); margin-top:2px; }
+.dh-card .u { font-size:.95rem; font-weight:600; color:var(--muted); margin-left:4px; }
+.dh-card .s { font-size:.8rem; color:var(--muted); margin-top:4px; }
+.dh-card.lvl0 { border-left:5px solid var(--ok); }
+.dh-card.lvl1 { border-left:5px solid var(--warn); }
+.dh-card.lvl2 { border-left:5px solid var(--danger); }
+.dh-card.lvl0 .v { color:var(--ok); }
+.dh-card.lvl1 .v { color:var(--warn); }
+.dh-card.lvl2 .v { color:var(--danger); }
+
+/* ---------- 고도별 풍속 게이지 ---------- */
+.dh-section { font-size:1.05rem; font-weight:800; margin:18px 0 10px; color:var(--text); }
+.dh-gauges { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:10px 18px; }
+.dh-grow { display:grid; grid-template-columns:70px 1fr 150px; align-items:center; gap:14px; padding:10px 0;
+           border-bottom:1px dashed var(--border); }
+.dh-grow:last-child { border-bottom:none; }
+.dh-grow .alt { font-weight:800; color:var(--text); }
+.dh-grow .alt small { display:block; font-weight:500; color:var(--muted); font-size:.72rem; }
+.dh-track { position:relative; height:14px; border-radius:999px; background:rgba(127,127,127,.18); overflow:visible; }
+.dh-fill { height:100%; border-radius:999px; }
+.dh-fill.lvl0 { background:var(--ok); }
+.dh-fill.lvl1 { background:var(--warn); }
+.dh-fill.lvl2 { background:var(--danger); }
+.dh-mark { position:absolute; top:-4px; bottom:-4px; width:2px; background:var(--muted); opacity:.7; }
+.dh-mark span { position:absolute; top:18px; left:-14px; font-size:.65rem; color:var(--muted); white-space:nowrap; }
+.dh-grow .val { text-align:right; font-weight:700; color:var(--text); }
+.dh-grow .val small { color:var(--muted); font-weight:500; margin-left:6px; }
+.dh-note { color:var(--muted); font-size:.8rem; margin-top:8px; }
+
+@media (max-width: 640px) {
+  .dh-grow { grid-template-columns:54px 1fr; }
+  .dh-grow .val { grid-column:1 / -1; text-align:left; }
+  .dh-hero .title { font-size:1.5rem; }
+}
