@@ -43,7 +43,7 @@ def _render_msg(i, m, latest):
         return
     with st.chat_message("assistant", avatar="🤖"):
         if m.get("route"):
-            st.caption(BADGE.get(m["route"], ""))
+            st.caption(BADGE.get(m["route"], "") + (" · " + m["reason"] if m.get("reason") else ""))
         if m.get("warn"):
             st.warning("⚡ **[하드웨어 결선 주의]** 전원·결선은 극성 하나만 틀려도 부품이 파손됩니다. "
                        "연결 전에 제조사 원문 핀맵을 반드시 대조하세요.")
@@ -111,7 +111,7 @@ def render():
                     hist.pop()
                     return
         text = out["tabs"]["compare"] if out["tabs"] else out["answer"]
-        hist.append({"role": "assistant", "content": out["answer"] or "", "route": out["route"],
+        hist.append({"role": "assistant", "content": out["answer"] or "", "route": out["route"], "reason": out.get("reason", ""),
                      "warn": out["warn"], "tabs": out["tabs"], "hits": out["hits"], "web": out["web"]})
         st.session_state.setdefault("ops_log", []).append({
             "일시": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "질문": q, "경로": out["route"],
