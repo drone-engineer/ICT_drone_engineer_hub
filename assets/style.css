@@ -1,0 +1,18 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+
+.stApp { background: __APP_BG__; color: __TEXT__; font-family: "Pretendard", sans-serif; }
+.stApp [data-testid="stSidebar"] { background: __SIDEBAR_BG__; }
+.stApp .stMarkdown, .stApp label, .stApp h1, .stApp h2, .stApp h3 { color: __TEXT__; }
+
+.stApp [data-testid="stSidebar"] [role="radiogroup"] label p {
+  font-size: 1.15rem; font-weight: 800;
+}
+.stApp [data-testid="stSidebar"] [role="radiogroup"] label:hover p {
+  color: __ACCENT__; text-shadow: 0 0 8px __ACCENT__;
+}
+
+.stApp input, .stApp textarea, .stApp [data-baseweb="select"] > div {
+  background-color: __SIDEBAR_BG__; color: __TEXT__; border-color: __ACCENT__;
+}
+.stApp [data-testid="stChatInput"] textarea { color: __TEXT__; }
+.stApp a { color: __ACCENT__; }
