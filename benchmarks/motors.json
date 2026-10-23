@@ -1,0 +1,41 @@
+{
+  "_안내": "name이 SAMPLE로 시작하는 항목은 화면 동작 확인용 가상값입니다. 제조사 공식 추력표 값으로 교체하세요.",
+  "models": [
+    {
+      "name": "SAMPLE-모터A (가상값, 실측 아님)",
+      "sample": true,
+      "points": [
+        {
+          "throttle": 30,
+          "thrust_g": 800,
+          "power_w": 55
+        },
+        {
+          "throttle": 40,
+          "thrust_g": 1400,
+          "power_w": 115
+        },
+        {
+          "throttle": 50,
+          "thrust_g": 2100,
+          "power_w": 200
+        },
+        {
+          "throttle": 60,
+          "thrust_g": 2900,
+          "power_w": 320
+        },
+        {
+          "throttle": 80,
+          "thrust_g": 4500,
+          "power_w": 650
+        },
+        {
+          "throttle": 100,
+          "thrust_g": 6000,
+          "power_w": 1050
+        }
+      ]
+    }
+  ]
+}
