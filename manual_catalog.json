@@ -1,0 +1,274 @@
+{
+ "01_비행제어기_FC": [
+  {
+   "file": "dRehmFlight_VTOL_documentation.pdf",
+   "pages": 72,
+   "empty_pages": 1,
+   "chunks": 159
+  }
+ ],
+ "02_모터_구동계": [
+  {
+   "file": "Hobbywing_X6-Plus-MFP-24x8_technical-parameters.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 2
+  },
+  {
+   "file": "Hobbywing_XRotor-X6-Plus_manual.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 19
+  },
+  {
+   "file": "KDE-Direct_KDE5215XF-220_datasheet.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 11
+  },
+  {
+   "file": "motor_4kg_thrust_datasheet.pdf",
+   "pages": 8,
+   "empty_pages": 0,
+   "chunks": 31
+  },
+  {
+   "file": "rd-m-x6.1-kv175-Datasheet-tRaIlQyOB-Datasheet.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 2
+  },
+  {
+   "file": "Reflex-Drive-Brochure-10_08_2024-latest-Edits.pdf",
+   "pages": 45,
+   "empty_pages": 7,
+   "chunks": 48
+  }
+ ],
+ "03_변속기_ESC": [
+  {
+   "file": "Hobbywing_XRotor-40A_manual.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 6
+  },
+  {
+   "file": "Hobbywing_XRotor-Pro-H110A-14S-FOC_manual.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 36
+  },
+  {
+   "file": "Hobbywing_XRotor-Pro-H60A-6S-FOC_manual.pdf",
+   "pages": 1,
+   "empty_pages": 0,
+   "chunks": 14
+  }
+ ],
+ "04_프로펠러_공력": [
+  {
+   "file": "Hobbywing_MFP-24x8_specification.pdf",
+   "pages": 2,
+   "empty_pages": 0,
+   "chunks": 2
+  },
+  {
+   "file": "Hobbywing_MSC-16x5-4_specification.pdf",
+   "pages": 9,
+   "empty_pages": 4,
+   "chunks": 8
+  }
+ ],
+ "05_전원_배터리_PDB": [
+  {
+   "file": "Gens-ace_LiPo-battery_manual.pdf",
+   "pages": 2,
+   "empty_pages": 2,
+   "chunks": 0
+  },
+  {
+   "file": "Grepow_Tattu-Plus-smart-battery_user-guide.pdf",
+   "pages": 2,
+   "empty_pages": 0,
+   "chunks": 8
+  },
+  {
+   "file": "Grepow_Tattu-UAV-battery_catalog.pdf",
+   "pages": 20,
+   "empty_pages": 20,
+   "chunks": 0
+  }
+ ],
+ "06_센서_항법장치": [
+  {
+   "file": "Bitcraze_Loco-Positioning-Deck_datasheet.pdf",
+   "pages": 2,
+   "empty_pages": 0,
+   "chunks": 3
+  },
+  {
+   "file": "Intel_RealSense-D400-series_datasheet.pdf",
+   "pages": 159,
+   "empty_pages": 1,
+   "chunks": 269
+  }
+ ],
+ "07_조종_데이터링크": [
+  {
+   "file": "Align_A13-HERA1301T_manual.pdf",
+   "pages": 61,
+   "empty_pages": 61,
+   "chunks": 0
+  },
+  {
+   "file": "Geraci_2022_UAV-cellular-5G-to-6G_paper.pdf",
+   "pages": 27,
+   "empty_pages": 0,
+   "chunks": 151
+  },
+  {
+   "file": "SIYI_MK15_user-manual.pdf",
+   "pages": 154,
+   "empty_pages": 0,
+   "chunks": 179
+  },
+  {
+   "file": "SIYI_UniRC-7_user-manual.pdf",
+   "pages": 139,
+   "empty_pages": 0,
+   "chunks": 150
+  }
+ ],
+ "09_프레임_페이로드": [
+  {
+   "file": "DJI_Lito-X1_user-manual_en.pdf",
+   "pages": 92,
+   "empty_pages": 1,
+   "chunks": 148
+  },
+  {
+   "file": "DJI_Lito-X1_user-manual_ko.pdf",
+   "pages": 76,
+   "empty_pages": 1,
+   "chunks": 86
+  },
+  {
+   "file": "NearthLab_KAiDEN_datasheet.pdf",
+   "pages": 2,
+   "empty_pages": 0,
+   "chunks": 3
+  }
+ ],
+ "10_안전_비행규정": [
+  {
+   "file": "KIAST_ultralight-registration-safety-certification_guide.pdf",
+   "pages": 17,
+   "empty_pages": 17,
+   "chunks": 0
+  }
+ ],
+ "11_온보드컴퓨터_임베디드": [
+  {
+   "file": "Radxa_Dragon-Q8B_product-brief.pdf",
+   "pages": 12,
+   "empty_pages": 0,
+   "chunks": 14
+  },
+  {
+   "file": "Raspberry-Pi_5_product-brief.pdf",
+   "pages": 7,
+   "empty_pages": 0,
+   "chunks": 10
+  }
+ ],
+ "12_미들웨어_통신_ROS": [
+  {
+   "file": "Abdulhae_2022_FANET-cluster-routing_paper.pdf",
+   "pages": 24,
+   "empty_pages": 0,
+   "chunks": 100
+  },
+  {
+   "file": "Aerostack2_2023_framework_paper.pdf",
+   "pages": 8,
+   "empty_pages": 0,
+   "chunks": 44
+  },
+  {
+   "file": "DSTL_SAPIENT_interface-control-document-v7.pdf",
+   "pages": 73,
+   "empty_pages": 0,
+   "chunks": 142
+  },
+  {
+   "file": "Kaiser_2022_ROS2swarm_paper.pdf",
+   "pages": 7,
+   "empty_pages": 0,
+   "chunks": 40
+  },
+  {
+   "file": "Tsao_2022_UAV-FANET-cyber-security-survey_paper.pdf",
+   "pages": 40,
+   "empty_pages": 0,
+   "chunks": 182
+  },
+  {
+   "file": "Vasylyshyn_2024_drone-swarm-Solana-blockchain_paper.pdf",
+   "pages": 13,
+   "empty_pages": 0,
+   "chunks": 42
+  }
+ ],
+ "13_컴퓨터비전_AI_YOLO": [
+  {
+   "file": "Sapkota_2025_YOLO26-architecture-benchmark_paper.pdf",
+   "pages": 15,
+   "empty_pages": 0,
+   "chunks": 64
+  }
+ ],
+ "14_SLAM_경로계획_내비": [
+  {
+   "file": "Brust_2021_swarm-based-counter-UAV-defense_paper.pdf",
+   "pages": 19,
+   "empty_pages": 0,
+   "chunks": 60
+  },
+  {
+   "file": "Dorigo_2021_swarm-robotics-past-present-future_paper.pdf",
+   "pages": 14,
+   "empty_pages": 0,
+   "chunks": 89
+  },
+  {
+   "file": "Li_2025_AirSwarm-COTS-multi-UAV_paper.pdf",
+   "pages": 9,
+   "empty_pages": 0,
+   "chunks": 49
+  },
+  {
+   "file": "Shakhatreh_2019_UAV-civil-applications-survey_paper.pdf",
+   "pages": 63,
+   "empty_pages": 0,
+   "chunks": 315
+  },
+  {
+   "file": "Shan_2021_UWB-swarm-ranging_INFOCOM_paper.pdf",
+   "pages": 10,
+   "empty_pages": 0,
+   "chunks": 52
+  },
+  {
+   "file": "Teng_2020_multi-UAV-surveillance-trajectory-PSO_paper.pdf",
+   "pages": 12,
+   "empty_pages": 0,
+   "chunks": 48
+  },
+  {
+   "file": "Wang_2021_MADRL-multi-UAV-MEC-trajectory_paper.pdf",
+   "pages": 11,
+   "empty_pages": 0,
+   "chunks": 54
+  }
+ ]
+}
