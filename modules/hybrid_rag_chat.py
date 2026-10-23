@@ -97,7 +97,7 @@ def render():
                 except Exception as e:
                     st.error(f"점검표 생성 실패: {e}")
 
-    q = st.chat_input("질문을 입력하세요 (예: Pixhawk 6C 전원 모듈 VCC/GND 핀 순서는?)") or pending
+    q = st.chat_input("질문을 입력하세요 (예: Hobbywing X6 Plus 모터 사양은?)") or pending
     if q:
         hist.append({"role": "user", "content": q})
         with st.chat_message("user", avatar="👤"):
@@ -111,8 +111,9 @@ def render():
                     hist.pop()
                     return
         text = out["tabs"]["compare"] if out["tabs"] else out["answer"]
-        hist.append({"role": "assistant", "content": out["answer"] or "", "route": out["route"], "reason": out.get("reason", ""),
-                     "warn": out["warn"], "tabs": out["tabs"], "hits": out["hits"], "web": out["web"]})
+        hist.append({"role": "assistant", "content": out["answer"] or "", "route": out["route"],
+                     "reason": out.get("reason", ""), "warn": out["warn"], "tabs": out["tabs"],
+                     "hits": out["hits"], "web": out["web"]})
         st.session_state.setdefault("ops_log", []).append({
             "일시": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "질문": q, "경로": out["route"],
             "페르소나": persona, "계통": ", ".join(sorted({h["domain"] for h in out["hits"]})),
