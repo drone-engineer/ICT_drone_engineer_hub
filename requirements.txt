@@ -8,6 +8,7 @@ folium==0.20.0
 streamlit-folium==0.27.4
 streamlit-js-eval==1.0.0
 faiss-cpu==1.15.1
-pymupdf==2.0
 openai==3.35.1
 tavily-python==0.8.5
+pypdf==6.21.1
+html5lib==1.1
