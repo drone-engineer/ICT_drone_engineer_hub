@@ -1,8 +1,8 @@
-import pandas as pd
 import streamlit as st
 
 from utils import airspace, geocode, space_weather, weather
-from utils.safety_rules import LEGAL_ALT_M, LEVELS, grade_kp
+from utils import components as ui_c
+from utils.safety_rules import LEGAL_ALT_M, grade_kp
 from utils.ui import key
 
 M = "safety"
@@ -69,61 +69,72 @@ def _location_picker():
             st.warning(f"GPS를 사용할 수 없습니다: {e}")
             ss[key(M, "gps_req")] = False
 
-    st.caption(f"현재 위치: **{ss['loc_name']}** ({ss['loc_lat']:.4f}, {ss['loc_lon']:.4f})")
-
 
 def render():
-    st.header("🛰️ 사전 비행 안전 진단")
-    _location_picker()
+    with st.expander("📍 위치 설정", expanded=False):
+        _location_picker()
+    name = st.session_state["loc_name"]
     lat, lon = st.session_state["loc_lat"], st.session_state["loc_lon"]
 
-    # ---- 상공 기상 ----
     try:
         wx = _wx(lat, lon)
     except Exception as e:
+        st.markdown(ui_c.hero("PRE-FLIGHT BRIEFING", "사전 비행 안전 진단", f"{name} ({lat:.3f}, {lon:.3f})"),
+                    unsafe_allow_html=True)
         st.error(f"기상 데이터를 불러오지 못했습니다: {e}")
-        wx = None
+        return
 
-    if wx:
-        alts = [r["alt"] for r in wx["rows"]]
-        sel = st.select_slider("판정 기준 고도 (m)", options=alts, value=120, key=key(M, "alt"))
-        row = next(r for r in wx["rows"] if r["alt"] == sel)
+    alts = [r["alt"] for r in wx["rows"]]
+    sel = st.select_slider("판정 기준 고도 (m)", options=alts, value=120, key=key(M, "alt"))
+    row = next(r for r in wx["rows"] if r["alt"] == sel)
 
-        c1, c2 = st.columns(2)
-        with c1:
-            st.metric(f"{row['icon']} {sel}m 종합 판정", row["label"])
-            for reason in row["reasons"]:
-                st.caption("• " + reason)
-        with c2:
-            try:
-                t, kp = _kp()
-                g = grade_kp(kp)
-                st.metric(f"{g['icon']} 지자기 Kp", f"{kp:.1f}", g["label"])
-            except Exception as e:
-                st.warning(f"Kp 데이터를 불러오지 못했습니다: {e}")
+    try:
+        _, kp = _kp()
+        gk = grade_kp(kp)
+    except Exception:
+        kp, gk = None, None
 
-        m1, m2, m3 = st.columns(3)
-        m1.metric("기온", f"{wx['temp']:.1f} ℃" if wx["temp"] is not None else "-")
-        m2.metric("강수확률", f"{wx['precip']:.0f} %" if wx["precip"] is not None else "-")
-        m3.metric("10m 순간돌풍", f"{wx['gust']:.1f} m/s" if wx["gust"] is not None else "-")
-
-        df = pd.DataFrame([{
-            "고도(m)": r["alt"], "풍속(m/s)": round(r["wind"], 1),
-            "판정": f"{r['icon']} {r['label']}", "비고": r["note"]} for r in wx["rows"]])
-        st.dataframe(df, hide_index=True, use_container_width=True)
-        st.caption(f"기준 시각 {wx['time']} (현지). 돌풍은 10m 값만 제공되어 모든 고도 판정에 동일 적용됩니다. "
-                   f"법정 한계 고도는 지표면 기준 {LEGAL_ALT_M}m입니다.")
-
-    # ---- 공역 ----
-    st.subheader("🗺️ 항공 공역")
+    chips = [ui_c.chip(f"{row['icon']} {sel}m {row['label']}", row["level"])]
+    if gk:
+        chips.append(ui_c.chip(f"{gk['icon']} Kp {kp:.1f} {gk['label']}", gk["level"]))
     hits = airspace.inside_zones(lat, lon)
     if hits:
-        for kind, name, d in hits:
-            (st.error if kind in ("P", "R") else st.warning)(
-                f"현재 위치는 **[{kind}] {name}** 범위 안으로 보입니다 (중심까지 {d:.1f}km). 비행 승인 여부를 확인하세요.")
-    else:
-        st.success("개략 데이터 기준으로 P/R/CTR 구역 밖입니다. (공식 확인 필수)")
-    from streamlit_folium import st_folium
-    st_folium(airspace.build_map(lat, lon), height=520, use_container_width=True,
-              returned_objects=[], key=key(M, "map"))
-    st.caption("🔴 P(비행금지) · 🟠 R(비행제한) · 🔵 CTR(공항 관제권)  |  " + airspace.DISCLAIMER)
+        chips.append(ui_c.chip(f"🚧 {hits[0][1]} 범위", 2 if hits[0][0] in ("P", "R") else 1))
+    st.markdown(ui_c.hero("PRE-FLIGHT BRIEFING", "사전 비행 안전 진단",
+                          f"{name} ({lat:.3f}, {lon:.3f}) · 기준 시각 {wx['time'].replace('T', ' ')} (현지)",
+                          chips), unsafe_allow_html=True)
+
+    tab_wx, tab_air = st.tabs(["🌬️ 상공 기상", "🗺️ 항공 공역"])
+
+    with tab_wx:
+        cards = [ui_c.kpi(f"{sel}m 풍속", f"{row['wind']:.1f}", "m/s", row["label"], row["level"])]
+        cards.append(ui_c.kpi("기온", f"{wx['temp']:.1f}" if wx["temp"] is not None else "-", "℃",
+                              "0℃ 이하 LiPo 주의"))
+        cards.append(ui_c.kpi("강수확률", f"{wx['precip']:.0f}" if wx["precip"] is not None else "-", "%",
+                              "40% 이상 비행 금지"))
+        cards.append(ui_c.kpi("10m 순간돌풍", f"{wx['gust']:.1f}" if wx["gust"] is not None else "-", "m/s",
+                              "전 고도 판정에 동일 적용"))
+        if gk:
+            cards.append(ui_c.kpi("지자기 Kp", f"{kp:.1f}", "", gk["label"], gk["level"]))
+        st.markdown(ui_c.grid(cards), unsafe_allow_html=True)
+
+        if row["reasons"]:
+            st.warning("판정 사유: " + " / ".join(row["reasons"]))
+
+        st.markdown(ui_c.section("고도별 풍속 프로파일"), unsafe_allow_html=True)
+        st.markdown(ui_c.gauge_rows(wx["rows"]), unsafe_allow_html=True)
+        st.markdown(f'<div class="dh-note">눈금선은 주의(7 m/s)·금지(10 m/s) 기준입니다. '
+                    f'법정 한계 고도는 지표면 기준 {LEGAL_ALT_M}m이며 40m는 보간 추정값입니다.</div>',
+                    unsafe_allow_html=True)
+
+    with tab_air:
+        if hits:
+            for kind, nm, d in hits:
+                (st.error if kind in ("P", "R") else st.warning)(
+                    f"현재 위치는 **[{kind}] {nm}** 범위 안으로 보입니다 (중심까지 {d:.1f}km). 비행 승인 여부를 확인하세요.")
+        else:
+            st.success("개략 데이터 기준으로 P/R/CTR 구역 밖입니다. (공식 확인 필수)")
+        from streamlit_folium import st_folium
+        st_folium(airspace.build_map(lat, lon), height=520, use_container_width=True,
+                  returned_objects=[], key=key(M, "map"))
+        st.caption("🔴 P(비행금지) · 🟠 R(비행제한) · 🔵 CTR(공항 관제권)  |  " + airspace.DISCLAIMER)
